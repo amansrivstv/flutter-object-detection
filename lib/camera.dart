@@ -3,8 +3,6 @@ import 'package:camera/camera.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 
-import 'models.dart';
-
 typedef void Callback(List<dynamic> list, int h, int w);
 
 class Camera extends StatefulWidget {
@@ -44,51 +42,17 @@ class _CameraState extends State<Camera> {
             isDetecting = true;
 
             int startTime = new DateTime.now().millisecondsSinceEpoch;
-
-            if (widget.model == mobilenet) {
-              Tflite.runModelOnFrame(
-                bytesList: img.planes.map((plane) {
-                  return plane.bytes;
-                }).toList(),
-                imageHeight: img.height,
-                imageWidth: img.width,
-                numResults: 2,
-              ).then((recognitions) {
-                int endTime = new DateTime.now().millisecondsSinceEpoch;
-                print("Detection took ${endTime - startTime}");
-
-                widget.setRecognitions(recognitions, img.height, img.width);
-
-                isDetecting = false;
-              });
-            } else if (widget.model == posenet) {
-              Tflite.runPoseNetOnFrame(
-                bytesList: img.planes.map((plane) {
-                  return plane.bytes;
-                }).toList(),
-                imageHeight: img.height,
-                imageWidth: img.width,
-                numResults: 2,
-              ).then((recognitions) {
-                int endTime = new DateTime.now().millisecondsSinceEpoch;
-                print("Detection took ${endTime - startTime}");
-
-                widget.setRecognitions(recognitions, img.height, img.width);
-
-                isDetecting = false;
-              });
-            } else {
               Tflite.detectObjectOnFrame(
                 bytesList: img.planes.map((plane) {
                   return plane.bytes;
                 }).toList(),
-                model: widget.model == yolo ? "YOLO" : "SSDMobileNet",
+                model: "YOLO",
                 imageHeight: img.height,
                 imageWidth: img.width,
-                imageMean: widget.model == yolo ? 0 : 127.5,
-                imageStd: widget.model == yolo ? 255.0 : 127.5,
+                imageMean:0,
+                imageStd: 255.0,
                 numResultsPerClass: 1,
-                threshold: widget.model == yolo ? 0.2 : 0.4,
+                threshold: 0.2,
               ).then((recognitions) {
                 int endTime = new DateTime.now().millisecondsSinceEpoch;
                 print("Detection took ${endTime - startTime}");
@@ -97,7 +61,6 @@ class _CameraState extends State<Camera> {
 
                 isDetecting = false;
               });
-            }
           }
         });
       });

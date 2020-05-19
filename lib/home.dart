@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
-
 import 'camera.dart';
 import 'bndbox.dart';
-import 'models.dart';
+
+const String yolo = "Tiny YOLOv2";
 
 class HomePage extends StatefulWidget {
   final List<CameraDescription> cameras;
