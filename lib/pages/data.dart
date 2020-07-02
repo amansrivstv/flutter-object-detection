@@ -6,7 +6,7 @@ class InsectInfo {
 
   InsectInfo({this.name, this.brief, this.code, this.image});
 }
-
+//insect database data list
 List<InsectInfo> inData = [
   new InsectInfo(
       name: "Eocanthecona Bug",
