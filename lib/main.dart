@@ -1,3 +1,4 @@
+//importing packages
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -6,18 +7,20 @@ import 'pages/about_screen.dart';
 import 'pages/database_screen.dart';
 import 'pages/usage_screen.dart';
 
+// getting the lists of cameras using the camera plugin.
 List<CameraDescription> cameras;
 
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
+    //Asking camera access permissions from the user.
     cameras = await availableCameras();
   } on CameraException catch (e) {
     print('Error: $e.code\nError Message: $e.message');
   }
   runApp(new MyApp());
 }
-
+// base scaffold of the app
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -68,6 +71,7 @@ class _DetectorHomeState extends State<DetectorHome>
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
+          //tabs in app
           tabs: <Widget>[
             Tab(text: "INSECT DATABASE"),
             Tab(
@@ -92,6 +96,8 @@ class _DetectorHomeState extends State<DetectorHome>
           About(),
         ],
       ),
+      
+      //floating action button for detector
       floatingActionButton: FloatingActionButton(
               backgroundColor: Theme.of(context).accentColor,
               child: Icon(
