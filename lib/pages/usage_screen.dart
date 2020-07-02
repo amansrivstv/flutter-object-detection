@@ -7,6 +7,7 @@ class Usage extends StatelessWidget {
       child: Padding(
         padding : const EdgeInsets.all(30),
         child :
+        //usage text
         new Text(
         "Click on the Floating Action Button to open camera and point it towards the insect you wish to detect.",
         style: new TextStyle(fontSize: 25.0),
