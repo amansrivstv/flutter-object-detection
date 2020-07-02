@@ -1,6 +1,7 @@
+//importing packages
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
+//creating a class of bounding box
 class BndBox extends StatelessWidget {
   final List<dynamic> results;
   final int previewH;
@@ -11,7 +12,7 @@ class BndBox extends StatelessWidget {
 
   BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
       this.model);
-
+//initializing variables x,y,w,h for detected object
   @override
   Widget build(BuildContext context) {
     List<Widget> _renderBoxes() {
@@ -41,7 +42,7 @@ class BndBox extends StatelessWidget {
           h = _h * scaleH;
           if (_y < difH / 2) h -= (difH / 2 - _y) * scaleH;
         }
-
+        
         return Positioned(
           left: math.max(0, x),
           top: math.max(0, y),
