@@ -8,7 +8,7 @@ class Database extends StatefulWidget {
   }
 }
 
-
+//creating datablase page, by showing information as lists
 class DatabaseState extends State<Database> {
   @override
   Widget build(BuildContext context) {
